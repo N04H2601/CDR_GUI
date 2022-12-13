@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import *
 
 class Window(QMainWindow):
 
+    # Definition of the "openFile" method which opens an image file to replace the table picture
     def openFile(self):
         try:
             fileName, _ = QFileDialog.getOpenFileName(
@@ -20,14 +21,17 @@ class Window(QMainWindow):
         except Exception as e:
             print(e)
 
+    # Definition of the "redirectReglement" method which opens the CDR rules in a new tab
     def redirectReglement(self):
         webbrowser.open(
             'https://wobbly-kryptops-c2e.notion.site/CDR-2023-a5c81e4559d4449bab987941d388ea8d', new=2)
 
+    # Definition of the "default2022_2023" method which sets the default theme of the table
     def default2022_2023(self):
         self.table_picture.hide()
         self._add_table_picture('table.png')
 
+    # Definition of the "_create_menu_bar" method which creates the menu bar
     def _create_menu_bar(self):
         self.menu_bar = self.menuBar()
         self.menu_bar.setStyleSheet('background-color: #B3C2FF;')
@@ -45,11 +49,13 @@ class Window(QMainWindow):
         self.reglementAction = QAction('CDR 2022-2023', self)
         self.help_menu.addAction(self.reglementAction)
 
+    # Definition of the "_connect_actions" method which connects the actions to the methods
     def _connect_actions(self):
         self.openAction.triggered.connect(self.openFile)
         self.reglementAction.triggered.connect(self.redirectReglement)
         self.defaultAction.triggered.connect(self.default2022_2023)
 
+    # Definition of the "_add_table_picture" method which adds the table picture to the window
     def _add_table_picture(self, filename='table.png'):
         self.table_picture = QLabel(self)
         pixmap = QPixmap(filename)
@@ -71,6 +77,7 @@ class Window(QMainWindow):
 
         self.main_layout.addLayout(self.layout)
 
+    # Definition of the "_create_main_layout" method which creates the main layout
     def _create_main_layout(self):
         self.main_layout = QHBoxLayout()
         self.main_layout.setSpacing(0)
@@ -80,6 +87,7 @@ class Window(QMainWindow):
         self.central_widget.setLayout(self.main_layout)
         self.setCentralWidget(self.central_widget)
 
+    # Definition of the "_create_actions_panel" method which creates the actions panel
     def _create_actions_panel(self):
         self.actions_label = QLabel('Actions', self)
         self.actions_label.setStyleSheet(
@@ -108,11 +116,61 @@ class Window(QMainWindow):
         self.points_layout.addSpacerItem(QSpacerItem(20, 0))
         self.points_layout.addWidget(self.points_container)
 
+        self.timer_label = QLabel('Timer', self)
+        self.timer_label.setStyleSheet(
+            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+        self.timer_label.setAlignment(Qt.AlignCenter)
+
+        self.timer_container = QLabel('0', self)
+        self.timer_container.setStyleSheet(
+            'color: #22427C; font-size: 25px; border-radius: 5px; padding: 5px; background-color: white;')
+        self.timer_container.setAlignment(Qt.AlignCenter)
+
+        self.timer_layout = QHBoxLayout()
+        self.timer_layout.setAlignment(Qt.AlignCenter)
+        self.timer_layout.addWidget(self.timer_label)
+        self.timer_layout.addSpacerItem(QSpacerItem(20, 0))
+        self.timer_layout.addWidget(self.timer_container)
+
+        self.coordinate_x_label = QLabel('X', self)
+        self.coordinate_x_label.setStyleSheet(
+            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+        self.coordinate_x_label.setAlignment(Qt.AlignCenter)
+
+        self.coordinate_x_container = QLabel('0', self)
+        self.coordinate_x_container.setStyleSheet(
+            'color: #22427C; font-size: 25px; border-radius: 5px; padding: 5px; background-color: white;')
+        self.coordinate_x_container.setAlignment(Qt.AlignCenter)
+
+        self.coordinate_y_label = QLabel('Y', self)
+        self.coordinate_y_label.setStyleSheet(
+            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+        self.coordinate_y_label.setAlignment(Qt.AlignCenter)
+
+        self.coordinate_y_container = QLabel('0', self)
+        self.coordinate_y_container.setStyleSheet(
+            'color: #22427C; font-size: 25px; border-radius: 5px; padding: 5px; background-color: white;')
+        self.coordinate_y_container.setAlignment(Qt.AlignCenter)
+
+        self.coordinates_layout = QHBoxLayout()
+        self.coordinates_layout.setAlignment(Qt.AlignCenter)
+        self.coordinates_layout.addWidget(self.coordinate_x_label)
+        self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
+        self.coordinates_layout.addWidget(self.coordinate_x_container)
+        self.coordinates_layout.addSpacerItem(QSpacerItem(40, 0))
+        self.coordinates_layout.addWidget(self.coordinate_y_label)
+        self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
+        self.coordinates_layout.addWidget(self.coordinate_y_container)
+
         self.actions_layout = QVBoxLayout()
         self.actions_layout.setAlignment(Qt.AlignCenter | Qt.AlignTop)
         self.actions_layout.addWidget(self.actions_label)
-        self.actions_layout.addSpacerItem(QSpacerItem(0, 20))
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
         self.actions_layout.addLayout(self.points_layout)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+        self.actions_layout.addLayout(self.timer_layout)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+        self.actions_layout.addLayout(self.coordinates_layout)
         self.actions_layout.addStretch(1)
         self.actions_layout.addSpacerItem(QSpacerItem(410, 0))
 
