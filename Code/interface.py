@@ -100,6 +100,16 @@ class Window(QMainWindow):
         shadow.setColor(QColor(0, 0, 0))
         self.actions_label.setGraphicsEffect(shadow)
 
+        self.battery_icon = QLabel(self)
+        self.battery_icon.setPixmap(QPixmap('battery_icon.png'))
+        self.battery_icon.setScaledContents(True)
+        self.battery_icon.setMaximumWidth(90)
+        self.battery_icon.setMaximumHeight(70)
+        self.battery_icon.setAlignment(Qt.AlignCenter)
+        self.battery_icon.setStyleSheet(
+            'border: 2px solid white; border-radius: 5px;')
+        self.battery_icon.setGraphicsEffect(shadow)
+
         self.points_label = QLabel('Points', self)
         self.points_label.setStyleSheet(
             'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
@@ -132,9 +142,14 @@ class Window(QMainWindow):
         self.timer_layout.addSpacerItem(QSpacerItem(20, 0))
         self.timer_layout.addWidget(self.timer_container)
 
+        self.coordinate_label = QLabel('Coordinates', self)
+        self.coordinate_label.setStyleSheet(
+            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+        self.coordinate_label.setAlignment(Qt.AlignCenter)
+
         self.coordinate_x_label = QLabel('X', self)
         self.coordinate_x_label.setStyleSheet(
-            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+            'color: white; font-size: 25px; border: 2px solid red; border-radius: 5px; padding: 5px;')
         self.coordinate_x_label.setAlignment(Qt.AlignCenter)
 
         self.coordinate_x_container = QLabel('0', self)
@@ -144,7 +159,7 @@ class Window(QMainWindow):
 
         self.coordinate_y_label = QLabel('Y', self)
         self.coordinate_y_label.setStyleSheet(
-            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+            'color: white; font-size: 25px; border: 2px solid red; border-radius: 5px; padding: 5px;')
         self.coordinate_y_label.setAlignment(Qt.AlignCenter)
 
         self.coordinate_y_container = QLabel('0', self)
@@ -152,25 +167,62 @@ class Window(QMainWindow):
             'color: #22427C; font-size: 25px; border-radius: 5px; padding: 5px; background-color: white;')
         self.coordinate_y_container.setAlignment(Qt.AlignCenter)
 
+        self.coordinates_separator = QLabel('-', self)
+        self.coordinates_separator.setStyleSheet(
+            'color: white; font-size: 25px; padding: 5px;')
+        self.coordinates_separator.setAlignment(Qt.AlignCenter)
+
         self.coordinates_layout = QHBoxLayout()
         self.coordinates_layout.setAlignment(Qt.AlignCenter)
+        self.coordinates_layout.addWidget(self.coordinate_label)
+        self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
         self.coordinates_layout.addWidget(self.coordinate_x_label)
         self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
         self.coordinates_layout.addWidget(self.coordinate_x_container)
-        self.coordinates_layout.addSpacerItem(QSpacerItem(40, 0))
+        self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
+        self.coordinates_layout.addWidget(self.coordinates_separator)
+        self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
         self.coordinates_layout.addWidget(self.coordinate_y_label)
         self.coordinates_layout.addSpacerItem(QSpacerItem(15, 0))
         self.coordinates_layout.addWidget(self.coordinate_y_container)
 
+        self.distance_label = QLabel('Distance covered', self)
+        self.distance_label.setStyleSheet(
+            'color: white; font-size: 25px; border: 2px solid white; border-radius: 5px; padding: 5px;')
+        self.distance_label.setAlignment(Qt.AlignCenter)
+
+        self.distance_container = QLabel('0', self)
+        self.distance_container.setStyleSheet(
+            'color: #22427C; font-size: 25px; border-radius: 5px; padding: 5px; background-color: white;')
+        self.distance_container.setAlignment(Qt.AlignCenter)
+
+        self.distance_layout = QHBoxLayout()
+        self.distance_layout.setAlignment(Qt.AlignCenter)
+        self.distance_layout.addWidget(self.distance_label)
+        self.distance_layout.addSpacerItem(QSpacerItem(20, 0))
+        self.distance_layout.addWidget(self.distance_container)
+
         self.actions_layout = QVBoxLayout()
         self.actions_layout.setAlignment(Qt.AlignCenter | Qt.AlignTop)
+
         self.actions_layout.addWidget(self.actions_label)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 20))
+
+        self.actions_layout.addWidget(self.battery_icon)
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
         self.actions_layout.addLayout(self.points_layout)
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
         self.actions_layout.addLayout(self.timer_layout)
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
         self.actions_layout.addLayout(self.coordinates_layout)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
+        self.actions_layout.addLayout(self.distance_layout)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
         self.actions_layout.addStretch(1)
         self.actions_layout.addSpacerItem(QSpacerItem(410, 0))
 
