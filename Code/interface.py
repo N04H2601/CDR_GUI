@@ -103,8 +103,8 @@ class Window(QMainWindow):
         self.battery_icon = QLabel(self)
         self.battery_icon.setPixmap(QPixmap('battery_icon.png'))
         self.battery_icon.setScaledContents(True)
-        self.battery_icon.setMaximumWidth(90)
-        self.battery_icon.setMaximumHeight(70)
+        self.battery_icon.setMaximumWidth(80)
+        self.battery_icon.setMaximumHeight(60)
         self.battery_icon.setAlignment(Qt.AlignCenter)
         self.battery_icon.setStyleSheet(
             'border: 2px solid white; border-radius: 5px;')
@@ -202,6 +202,16 @@ class Window(QMainWindow):
         self.distance_layout.addSpacerItem(QSpacerItem(20, 0))
         self.distance_layout.addWidget(self.distance_container)
 
+        self.bot_dvb = QLabel(self)
+        self.bot_dvb.setPixmap(QPixmap('bot_dvb.svg'))
+        self.bot_dvb.setScaledContents(False)
+        self.bot_dvb.setAlignment(Qt.AlignCenter)
+
+        self.enemy_bot = QLabel(self)
+        self.enemy_bot.setPixmap(QPixmap('enemy.svg'))
+        self.enemy_bot.setScaledContents(False)
+        self.enemy_bot.setAlignment(Qt.AlignCenter)
+
         self.actions_layout = QVBoxLayout()
         self.actions_layout.setAlignment(Qt.AlignCenter | Qt.AlignTop)
 
@@ -209,7 +219,7 @@ class Window(QMainWindow):
         self.actions_layout.addSpacerItem(QSpacerItem(0, 20))
 
         self.actions_layout.addWidget(self.battery_icon)
-        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 30))
 
         self.actions_layout.addLayout(self.points_layout)
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
@@ -221,6 +231,12 @@ class Window(QMainWindow):
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
 
         self.actions_layout.addLayout(self.distance_layout)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
+
+        self.actions_layout.addWidget(self.bot_dvb)
+        self.actions_layout.addSpacerItem(QSpacerItem(0, 30))
+
+        self.actions_layout.addWidget(self.enemy_bot)
         self.actions_layout.addSpacerItem(QSpacerItem(0, 40))
 
         self.actions_layout.addStretch(1)
